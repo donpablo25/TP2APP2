@@ -1,25 +1,37 @@
+// src/App.jsx
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 
-import LoginPage from "./pages/LoginPage";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import TeacherDashboard from "./pages/teacher/TeacherDashboard";
+import LoginPage from "./Pages/GoogleLogin/loginPage";
+import AdminDashboard from "./Pages/admin/AdminDashboard";
+import TeacherDashboard from "./Pages/teacher/TeacherDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <Router>
       <Routes>
-
-        {/* Page Login */}
         <Route path="/login" element={<LoginPage />} />
 
-        {/* Dashboards */}
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute allowedRole="admin">
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
 
-        {/* Par défaut → login */}
+        <Route
+          path="/teacher/dashboard"
+          element={
+            <ProtectedRoute allowedRole="enseignant">
+              <TeacherDashboard />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="*" element={<LoginPage />} />
-
       </Routes>
     </Router>
   );

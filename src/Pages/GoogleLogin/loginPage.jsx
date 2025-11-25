@@ -1,8 +1,9 @@
-import { loginWithGoogle } from "../firebase/auth";
-import { getUserRole } from "../firebase/roles";
+// src/pages/LoginPage.jsx
+import { loginWithGoogle } from "../../firebase/auth";
+import { getUserRole } from "../../firebase/roles";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function LoginPage() {
   const navigate = useNavigate();
 
   async function handleLogin() {
@@ -17,11 +18,9 @@ export default function Login() {
   }
 
   return (
-    <div className="login-container">
+    <div className="login-page">
       <h1>Portail des Plans de Cours</h1>
-      <button onClick={handleLogin}>
-        Se connecter avec Google
-      </button>
+      <button onClick={handleLogin}>Se connecter avec Google</button>
     </div>
   );
 }
